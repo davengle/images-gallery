@@ -10,5 +10,3 @@
  };
 
  export default Header;
-
-//  This is a test comment
