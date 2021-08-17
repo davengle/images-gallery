@@ -1,4 +1,4 @@
-import react from 'react';
+// import react from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 
 const Search = ( {searchTerm, setSearchTerm, handleSubmit } ) => {
