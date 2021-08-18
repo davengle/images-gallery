@@ -2,6 +2,8 @@ import { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Header from './components/Header'
 import Search from './components/Search'
+import ImageCard from './components/ImageCard'
+import { Container, Row, Col } from 'react-bootstrap'
 
 const UNSPLASH_KEY = process.env.REACT_APP_UNSPLASH_KEY
 
@@ -11,19 +13,21 @@ function App() {
 
   const handleSearchSubmit = (event) => {
     event.preventDefault()
-    console.log(searchTerm)
     fetch(
       `https://api.unsplash.com/photos/random/?query=${searchTerm}&client_id=${UNSPLASH_KEY}`
     )
       .then((result) => result.json())
       .then((data) => {
-        setImages([data, ...images])
-        console.log(images)
+        setImages([{ ...data, title: searchTerm }, ...images])
       })
       .catch((err) => {
         console.log(err)
       })
     setSearchTerm('')
+  }
+
+  const handleDeleteIamge = (id) => {
+    setImages(images.filter((image) => image.id !== id))
   }
 
   return (
@@ -34,6 +38,15 @@ function App() {
         setSearchTerm={setSearchTerm}
         handleSubmit={handleSearchSubmit}
       />
+      <Container className="mt-4">
+        <Row xs={1} md={2} lg={3}>
+          {images.map((image, i) => (
+            <Col className="pb-3" key={i}>
+              <ImageCard image={image} deleteImage={handleDeleteIamge} />
+            </Col>
+          ))}
+        </Row>
+      </Container>
     </div>
   )
 }

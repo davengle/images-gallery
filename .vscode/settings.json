@@ -7,5 +7,7 @@
     "editor.codeActionsOnSave": { 
         "source.fixAll.eslint":true
     },
-    "editor.tabSize": 2
+    "editor.tabSize": 2,
+    // Allow for spread operator in js files
+    "editor.acceptSuggestionOnCommitCharacter": false 
 }
